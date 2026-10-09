@@ -13,9 +13,26 @@ Validated locally on 2026-10-09. No physical motor was driven.
 - Vitis C/RTL co-simulation passed 86 top-level transactions using the same
   top_tb.cpp, including staged configuration, applied token, control ticks and
   stop. Detailed fault/calibration stress coverage is in the native tests.
-- SmartHLS/Libero synthesis, simulation and board implementation: NOT RUN.
-  Their project entry point is supplied; device selection and generated
-  interface/timing need verification with the actual installed release.
+- SmartHLS 2026.1 software simulation, HLS RTL generation and Questa RTL
+  co-simulation passed for representative PolarFireSoC MPFS250T at 100 MHz.
+  Co-simulation exercised 86 calls: 13,999 cycles total, latency 11..699 cycles,
+  average 161.77 cycles. This is simulation latency, not routed timing closure.
+- Fresh Libero 2026.1.0.17 installation in an Ubuntu 24.04 Docker volume:
+  installer exit zero, prerequisite status zero, batch Tcl startup passed.
+  The host is Ubuntu 26.04.1; native Libero lacked libxml2.so.2.
+- Libero/Synplify synthesis smoke test passed on the fresh installation with
+  an eight-bit counter targeting PolarFire SoC. All three relocated host license
+  daemons started successfully; tool license checkout and checkin succeeded.
+- Full controller Libero synthesis is not yet validated. The initial run was
+  stopped during TAO constraint mapping before Synplify; HLS RTL generation and
+  RTL co-simulation above are separate, completed checks.
+- Physical board implementation and motor validation: NOT RUN.
+
+The software clear argument was renamed from `reset` to `clear` because it
+collided with SmartHLS's generated hardware reset port in the co-simulation
+harness. Native tests, Vitis C simulation and SmartHLS RTL co-simulation passed
+after that change. Earlier Vitis synthesis/co-simulation results predate this
+port-name-only change.
 
 The Vitis build disables automatic loop pipelining in the register engine. The
 initial automatic-pipeline schedule missed the target clock; the final serial
