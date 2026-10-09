@@ -1,0 +1,5 @@
+# From this directory run shls init using the installed SmartHLS release.
+# Select the actual PolarFire SoC part and clock in its generated config.tcl.
+NAME = dvrmc_portable
+SRCS = ../../src/control.cpp ../../src/device.cpp ../../src/top.cpp ../../tests/top_tb.cpp
+USER_CXX_FLAG += -I../../include -DDVRMC_SMARTHLS

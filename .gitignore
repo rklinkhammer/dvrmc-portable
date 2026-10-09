@@ -1,0 +1,7 @@
+build*/
+work/
+.Xil/
+*.log
+platforms/smarthls/Makefile
+platforms/smarthls/config.tcl
+platforms/smarthls/hls_output/
