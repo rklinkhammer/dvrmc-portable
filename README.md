@@ -25,6 +25,15 @@ The example uses two simple motor models with different loads. Its gains are
 illustrative, not tuned parameters for a physical motor. All defaults start
 with outputs disabled and PID/feedforward gains zero.
 
+## Virtual motors, PWM and Hall signals
+
+Run `./build/virtual_motor build/motor.csv build/signals.vcd` after building.
+The closed-loop model generates switching PWM, simulates motor current and
+motion, and decodes generated Hall signals. Scenarios include load changes,
+reversal, stalls, sensor loss and watchdog shutdown. Physical constants are
+estimates. See the [virtual motor guide](docs/virtual_motor.md) for parameters,
+fault injection, automated tests and the Vitis HLS plant testbench.
+
 ## Software and hardware boundaries
 
 - `MotorProperties`: rated speed/voltage, encoder PPR, gearbox ratio, wheel radius,

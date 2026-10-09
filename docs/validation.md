@@ -45,3 +45,19 @@ snapshots, invalid configuration rejection, stop cancellation of pending enables
 forward/reverse PWM calibration, encoder scale, integral anti-windup, preservation
 of integral state on target-only commands, command watchdog, latched-fault
 acknowledgement and bounded arithmetic at the supported parameter extremes.
+
+## Virtual motor plant (2026-10-09)
+
+- Six native CTest suites passed with address/undefined-behaviour sanitizers,
+  including physical plant checks, closed-loop fault scenarios and the HLS-top
+  virtual motor bench. The original three regression suites still pass.
+- The example generated 14,000 CSV rows and a VCD with 347,333 ordered timestamps;
+  final telemetry confirmed both watchdog faults and zero output commands.
+- Vitis 2026.1 C simulation of `plant_top_tb.cpp` passed. HLS synthesis completed
+  for xc7z020clg400-1 at 100 MHz, estimated Fmax 142.05 MHz.
+- Vitis C/RTL co-simulation passed all 2,843 transactions from the virtual-plant
+  testbench, including tracking and watchdog shutdown. PWM and Hall decoding
+  remain testbench models; this does not validate an FPGA I/O shell.
+- Electrical/mechanical parameters are illustrative estimates. No measurements
+  or physical motor tests validate those constants. See `virtual_motor.md` for
+  model assumptions and the distinction between simulated faults and protection.
